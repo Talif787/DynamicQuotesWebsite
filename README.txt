@@ -1,0 +1,1 @@
+A Dynamic Quotes websites using HTML5, CSS3, Javascript and API. It also includes a tweet button to tweet the quote.
