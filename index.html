@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Quotes Website</title>
-</head>
-<body>
-    <div id="quotes">
-        <button>New Quotes</button>
-    </div>
+  </head>
+  <body>
+    <div id="quotes"></div>
+    <div id="author"></div>
+    <button onclick="getQuotes();">New Quotes</button>
+
     <script>
-        const getQuotes = async () => {
-        console.log("Hello");
-        const apiURL = "https://type.fit/api/quotes";
-        let fetchRes = await fetch(apiURL);
-        let commits = await fetchRes.json();
-        console.log(commits);
+      const getQuotes = async () => {
+        try {
+          console.log("Hello");
+          const apiURL = "https://type.fit/api/quotes";
+          let fetchRes = await fetch(apiURL);
+          let finalRes = await fetchRes.json();
+          let index = Math.floor(Math.random() * finalRes.length);
+          console.log(finalRes[index].text);
+          const finalText = finalRes[index].text;
+          const finalAuthor = finalRes[index].author;
+          if (finalAuthor != null) {
+            document.getElementById("quotes").innerText = finalText;
+            document.getElementById("author").innerText = finalAuthor;
+          } else {
+            document.getElementById("quotes").innerText = finalText;
+            document.getElementById("author").innerText = "By Unknown";
+          }
+        } catch (e) {
+          console.log("Some error occured..", e);
         }
+      };
 
-        getQuotes();
-
+      getQuotes();
     </script>
-    
-</body>
+  </body>
 </html>
