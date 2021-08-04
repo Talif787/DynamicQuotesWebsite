@@ -4,14 +4,41 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Dynamic Quotes Website</title>
   </head>
   <body>
     <div id="quotes"></div>
     <div id="author"></div>
     <button onclick="getQuotes();">New Quotes</button>
+    <button id="tweet" onclick="tweet();">Tweet</button>
+    <div class="container">
+      <div class="inner">
+        <div class="box">
+          <p class="number">
+            <img
+              src="/img/twitter-logo.jpeg"
+              alt="Image for tweet.."
+              title="Tweet the Quote."
+              height="60px"
+            />
+          </p>
+          <div class="text">
+            <i class="start-quote fas fa-quote-left"></i>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
+      let finalText;
+      let finalAuthor;
       const getQuotes = async () => {
         try {
           console.log("Hello");
@@ -20,8 +47,8 @@
           let finalRes = await fetchRes.json();
           let index = Math.floor(Math.random() * finalRes.length);
           console.log(finalRes[index].text);
-          const finalText = finalRes[index].text;
-          const finalAuthor = finalRes[index].author;
+          finalText = finalRes[index].text;
+          finalAuthor = finalRes[index].author;
           if (finalAuthor != null) {
             document.getElementById("quotes").innerText = finalText;
             document.getElementById("author").innerText = finalAuthor;
@@ -32,6 +59,10 @@
         } catch (e) {
           console.log("Some error occured..", e);
         }
+      };
+      const tweet = () => {
+        let tweetPost = `https://twitter.com/intent/tweet?text=${finalText}`;
+        window.open(tweetPost);
       };
 
       getQuotes();
