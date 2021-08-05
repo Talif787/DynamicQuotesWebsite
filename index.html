@@ -11,32 +11,37 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Dynamic Quotes Website</title>
   </head>
   <body>
-    <div id="quotes"></div>
+    <!-- <div id="quotes"></div>
     <div id="author"></div>
     <button onclick="getQuotes();">New Quotes</button>
-    <button id="tweet" onclick="tweet();">Tweet</button>
+    <button id="tweet" onclick="tweet();">Tweet</button> -->
     <div class="container">
-      <div class="inner">
+      <div class="inner" data-aos="zoom-in">
         <div class="box">
           <p class="number">
             <img
-              src="/img/twitter-logo.jpeg"
+              src="/img/TWITTER_icon-icons.com_62686.png"
               alt="Image for tweet.."
-              title="Tweet the Quote."
-              height="60px"
+              title="Tweet the Quote." onclick="tweet();"
             />
           </p>
           <div class="text">
             <i class="start-quote fas fa-quote-left"></i>
+            <p id="quotes" class="quotes"></p>
+            <p id="author" class="author"></p>
           </div>
+            <button id="newQ" class="button button5" onclick="getQuotes();">New Quote</button>
         </div>
       </div>
     </div>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+      AOS.init();
       let finalText;
       let finalAuthor;
       const getQuotes = async () => {
@@ -51,7 +56,7 @@
           finalAuthor = finalRes[index].author;
           if (finalAuthor != null) {
             document.getElementById("quotes").innerText = finalText;
-            document.getElementById("author").innerText = finalAuthor;
+            document.getElementById("author").innerText = "By " + finalAuthor;
           } else {
             document.getElementById("quotes").innerText = finalText;
             document.getElementById("author").innerText = "By Unknown";
